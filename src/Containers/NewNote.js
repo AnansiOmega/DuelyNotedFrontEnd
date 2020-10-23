@@ -5,13 +5,14 @@ import Background from '../images/Note.jpeg'
 import { Button } from 'semantic-ui-react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+// import authReducer from '../Reducers/auth'
 
 class NewNote extends React.Component {
     state = {
         title: '',
         body: '',
         category: '',
-        user_id: 5
+        user_id: ''
     }
 
 
@@ -30,6 +31,12 @@ class NewNote extends React.Component {
     handleCategory = (e) => {
         this.setState({
             category: e.target.value
+        })
+    }
+
+    componentDidMount(){
+        this.setState({
+            user_id: this.props.user.id
         })
     }
 
@@ -86,7 +93,8 @@ class NewNote extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        note: state.note
+        note: state.note,
+        user: state.auth
     }
 }
 

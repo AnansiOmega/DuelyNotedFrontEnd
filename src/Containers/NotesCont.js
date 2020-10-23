@@ -8,9 +8,10 @@ import { Card} from 'semantic-ui-react'
 class NotesCont extends React.Component {
 
     componentDidMount(){
-        fetch('http://localhost:3000/notes')
+        fetch(`http://localhost:3000/users/${this.props.user.id}`)
         .then(resp => resp.json())
-        .then(notes => {
+        .then(user => {
+            const notes = user.notes
             this.props.fetchNotesSuccess(notes)
         })
     }
@@ -35,7 +36,8 @@ class NotesCont extends React.Component {
 const mapStateToProps = (state) => {
     return {
         notes: state.notes,
-        search: state.search
+        search: state.search,
+        user: state.auth
     }
 }
 

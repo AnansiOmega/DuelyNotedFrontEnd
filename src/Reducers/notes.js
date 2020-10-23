@@ -5,7 +5,7 @@ const initialState = []
 const notesReducer = (state=initialState, action) =>{
     switch(action.type){
         case 'FETCH_NOTES_SUCCESS':
-            return [...action.payload]
+            return action.payload
         case 'REMOVE_NOTE':
             const newNotes = state.filter(note => note.id !== action.payload)
             return newNotes

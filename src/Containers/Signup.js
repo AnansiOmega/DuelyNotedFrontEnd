@@ -1,10 +1,13 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
+import { fetchUserSuccess } from '../Actions/auth'
+import { connect } from 'react-redux'
 
 
 class Signup extends React.Component {
     state = {
-        username: ''
+        username: '',
+        password: ''
     }
 
     handleChange = (e) => {
@@ -20,14 +23,34 @@ class Signup extends React.Component {
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({user: this.state})
         }
 
         fetch('http://localhost:3000/users', reqObj)
         .then(resp => resp.json())
-        .then(data => {
+        .then(user => {
+                const reqObj = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.state)
+                }
+            
+                fetch('http://localhost:3000/auth', reqObj)
+                .then(resp => resp.json())
+                .then(user => {
+                    if(user.error){
+                        this.setState({
+                            error: user.error
+                        })
+                    } else {
+                        localStorage.setItem('myToken', user.token)
+                        this.props.fetchUserSuccess(user)
+                        this.props.history.push('/home')
+                    }
+                })
         })
-        this.props.history.push('/home')
     }
 
     render(){
@@ -39,7 +62,7 @@ class Signup extends React.Component {
             </Form.Field>
             <Form.Field>
               <label>Password</label>
-              <input name='password' onChange={this.handleChange} placeholder='Password' />
+              <input type='password' name='password' onChange={this.handleChange} placeholder='Password' />
             </Form.Field>
             <Button type='submit'>Signup</Button>
           </Form>
@@ -47,4 +70,9 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup
+const mapDispatchToProps = {
+    fetchUserSuccess
+}
+
+
+export default connect(null, mapDispatchToProps)(Signup)

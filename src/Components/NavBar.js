@@ -37,11 +37,17 @@ class NavBar extends React.Component {
                         Home
                     </Menu.Item>
                 </Link>       
+                {
+                    this.props.auth.id
+                    ?
                 <Link to='/newnote'>
                     <Menu.Item>
                         New Note
                     </Menu.Item>
                     </Link>
+                    :
+                    null
+                }
                     {notes.length > 2 && <input style={myStyle} placeholder="Please type in a category you'd like to search by" type='text' onChange={this.handleChange}></input>}
                     {
                         this.props.auth.id
