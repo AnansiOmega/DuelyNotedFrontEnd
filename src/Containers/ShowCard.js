@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card } from 'semantic-ui-react'
+import { Button} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { showNote } from '../Actions/notes'
 import { removeNote } from '../Actions/notes'
@@ -21,6 +21,11 @@ class ShowCard extends React.Component {
         this.props.history.push('/home')
     }
 
+    renderBody = () => {
+        const body = this.props.note[0].body
+        return <div className='showBody' dangerouslySetInnerHTML={{ __html: body }}></div>
+        
+    }
 
     render(){
         const image = `url(${Background})`
@@ -28,11 +33,10 @@ class ShowCard extends React.Component {
         return(
             <div style={{ flexDirection: 'column', display: 'flex', backgroundImage: image, margin: '50px', padding: '2%', border: 'solid black 3px'}}>
             <div id='buttons'>
+                <h4 style={{marginLeft: '10px'}}>Category: {this.props.note[0].category}</h4>
             </div>
                 <h1 className='showTitle'>{this.props.note[0].title}</h1>
-                <pre className='showBody'>
-                    {this.props.note[0].body}
-                </pre>
+                {this.renderBody()}
             <div className='buttonDiv'>
                 <Link to={editLink}>
                 <Button basic color='black'>

@@ -3,26 +3,43 @@ import { connect } from 'react-redux'
 import { showNote, editNoteSuccess } from '../Actions/notes'
 import Background from '../images/Note.jpeg'
 import { Button } from 'semantic-ui-react'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 class EditNote extends React.Component {
     state = {
         title: '',
         body: '',
+        category: '',
         id: ''
     }
 
     componentDidMount(){
-        const { title, body, id } = this.props.note[0]
+        const { title, body, id, category } = this.props.note[0]
         this.setState({
             title,
             body,
+            category,
             id
         })
     }
     
-    handleChange = (e) => {
+   
+    handleTitle = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            title: e.target.value
+        })
+    }
+    
+    handleBody = (e) => {
+        this.setState({
+            body: e
+        })
+    }
+
+    handleCategory = (e) => {
+        this.setState({
+            category: e.target.value
         })
     }
 
@@ -45,16 +62,34 @@ class EditNote extends React.Component {
         })
     }
 
+    modules = {
+        toolbar: [
+          [{ 'header': [1, 2, false] }],
+          ['bold', 'italic', 'underline','strike', 'blockquote'],
+          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+          ['link', 'image'],
+          ['clean'], ['code-block']
+        ],
+      }
+     
+      formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image', 'code-block'
+      ]
+    
     
     
     render(){
         const image = `url(${Background})`
         return(
-            // <form>
-             <form onSubmit={this.handleSubmit} style={{ flexDirection: 'column', display: 'flex', backgroundImage: image}}>
-            <input className='newTitle' onChange={this.handleChange} type="text" name="title" value={this.state.title}></input><br></br><br></br>
-            <textarea className='newBody' onChange={this.handleChange} name="body" value={this.state.body}></textarea>
-            <Button style={{backgroundColor: 'rgba(255,248,199,0.3)'}} id='buttons' type='submit'>Submit</Button>     
+
+             <form onSubmit={this.handleSubmit} style={{ flexDirection: 'column', display: 'flex', backgroundImage: image, margin: '50px', padding: '2%', border: 'solid black 3px'}}>
+            <input style={{marginLeft: '0px'}} className='newTitle' onChange={this.handleTitle} type="text" name="title" value={this.state.title}></input><br></br><br></br>
+            <ReactQuill formats={this.formats} modules={this.modules} style={{height: '48vh'}} className='newBody' onChange={this.handleBody} name="body" value={this.state.body}/>
+            <input style={{marginTop: '60px'}} className='newBody' placeholder='category' onChange={this.handleCategory} type='text' name='category' value={this.state.category}></input>
+            <Button style={{backgroundColor: 'rgba(255,248,199,0.3)',  marginLeft: '1150px'}} id='buttons' type='submit'>Submit</Button>     
         </form>
         )
     }

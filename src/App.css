@@ -52,3 +52,7 @@ textarea {
 pre {
   white-space: pre-wrap;
 }
+
+.cardCont{
+  margin-left: 110px;
+}

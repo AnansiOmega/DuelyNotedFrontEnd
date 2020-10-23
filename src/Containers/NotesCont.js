@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchNotesSuccess } from '../Actions/notes'
 import NoteCard from '../Components/NoteCard'
-import { Card, Image } from 'semantic-ui-react'
+import { Card} from 'semantic-ui-react'
 
 
 class NotesCont extends React.Component {
@@ -16,14 +16,17 @@ class NotesCont extends React.Component {
     }
 
     renderNotes = () => {
-        return this.props.notes.map(note => {
+        let notes = this.props.notes.filter(notes => notes.category.toLowerCase().includes(this.props.search.toLowerCase()))
+        return notes.map(note => {
            return <NoteCard note={note} key={note.id}/>
         })    
     }
 
     render(){
         return(
+            <div className='cardCont'>
             <Card.Group>{this.renderNotes()}</Card.Group>
+            </div>
         )
     }
 
@@ -31,7 +34,8 @@ class NotesCont extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        notes: state.notes
+        notes: state.notes,
+        search: state.search
     }
 }
 

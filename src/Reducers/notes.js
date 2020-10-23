@@ -1,4 +1,4 @@
-import { bindActionCreators } from "redux"
+
 
 const initialState = []
 
@@ -14,16 +14,13 @@ const notesReducer = (state=initialState, action) =>{
             const note = state.filter(note => note.id === id)
             return note
         case 'EDIT_NOTE_SUCCESS':
-            // const newNote = {
-                // ...state,
-                // [state[0].title]: action.payload.title,
-                // [state[0].body]: action.payload.body
-            // }
-            state[0].title = action.payload.title
-            state[0].body = action.payload.body
-            // return [newNote]
-            // debugger
-            return state
+            const newNote = {
+                ...state[0], 
+                title: action.payload.title,
+                body: action.payload.body,
+                category: action.payload.category
+            }
+            return [newNote]
         default:
             return state
     }

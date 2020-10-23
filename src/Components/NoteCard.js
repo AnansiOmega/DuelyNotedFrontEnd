@@ -8,6 +8,20 @@ import Background from '../images/Note.jpeg'
 
 class NoteCard extends React.Component {
 
+    renderBody = () => {
+        const myStyle = {
+            color: 'black',
+            textAlign: 'center',
+            padding: '10px',
+            fontSize: '13px'
+            
+        }
+        const body = this.props.note.body
+        const newBody = body.length > 50 ? this.props.note.body.substring(0,30) + '...' : body
+        return <div style={myStyle} className='showBody' dangerouslySetInnerHTML={{ __html: newBody }}></div>
+        
+    }
+
     
     render(){
         const myStyle = {
@@ -17,16 +31,14 @@ class NoteCard extends React.Component {
         }
         const image = `url(${Background})`
         const link = `/home/showcard/${this.props.note.id}`
-        const {title, body} = this.props.note
+        const {title} = this.props.note
         return(
             <Card style={{backgroundImage: image,
             backgroundSize: '400px 400px'}}>
             <Card.Content>
                 <Link to={link}>
                     <Card.Header style={myStyle}>{title}</Card.Header>
-                    <Card.Description style={myStyle}>
-                        {body.length > 100 ? this.props.note.body.substring(0,100) + '...' : body}
-                    </Card.Description>
+                    {this.renderBody()}
                 </Link>
             </Card.Content>
         </Card>               
