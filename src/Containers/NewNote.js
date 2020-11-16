@@ -5,7 +5,6 @@ import Background from '../images/Note.jpeg'
 import { Button } from 'semantic-ui-react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-// import authReducer from '../Reducers/auth'
 
 class NewNote extends React.Component {
     state = {
@@ -85,7 +84,7 @@ class NewNote extends React.Component {
                 <input className='newTitle' placeholder="Title" onChange={this.handleTitle} type="text" name="title" value={this.state.title}></input><br></br><br></br>
                 <ReactQuill formats={this.formats} modules={this.modules} style={{height: '48vh'}} className='newBody' placeholder="Body" onChange={this.handleBody} name="body" value={this.state.body}/>
                 <input style={{marginTop: '60px'}} className='newBody' placeholder='category' onChange={this.handleCategory} type='text' name='category' value={this.state.category}></input>
-                <Button style={{backgroundColor: 'rgba(255,248,199,0.3)', marginLeft: '1150px'}} id='buttons' type='submit'>Submit</Button>     
+                <Button style={{backgroundColor: 'rgba(0,166,124,0.3)', marginLeft: '1150px'}} id='buttons' type='submit'>Submit</Button>     
             </form>
         )
     }

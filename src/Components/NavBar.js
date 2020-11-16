@@ -32,11 +32,17 @@ class NavBar extends React.Component {
         const notes = this.props.notes || []
         return(
             <Menu>
+                 {
+                    this.props.auth.id
+                    ?
                 <Link to='/home'>
                     <Menu.Item>
-                        Home
+                            Home
                     </Menu.Item>
                 </Link>       
+                    :
+                    null
+                }
                 {
                     this.props.auth.id
                     ?
@@ -44,33 +50,31 @@ class NavBar extends React.Component {
                     <Menu.Item>
                         New Note
                     </Menu.Item>
-                    </Link>
+                </Link>
                     :
                     null
                 }
                     {notes.length > 2 && <input style={myStyle} placeholder="Please type in a category you'd like to search by" type='text' onChange={this.handleChange}></input>}
                     {
-                        this.props.auth.id
-                        ?
-            <Menu.Menu position='right'>
-                <Link to='/' onClick={this.handleLogout}>
-                    <Menu.Item>
-                        Logout
-                    </Menu.Item>
-                </Link>
-            </Menu.Menu>
-            :
-            <Menu.Menu position='right'>
-                <Link to='/'>
-                    <Menu.Item>
-                        Login
-                    </Menu.Item>
-                </Link>
-            </Menu.Menu>
-
-
+                    this.props.auth.id
+                    ?
+                <Menu.Menu position='right'>
+                    <Link to='/' onClick={this.handleLogout}>
+                        <Menu.Item>
+                            Logout
+                        </Menu.Item>
+                    </Link>
+                </Menu.Menu>
+                    :
+                <Menu.Menu position='right'>
+                    <Link to='/'>
+                        <Menu.Item>
+                            Login
+                        </Menu.Item>
+                    </Link>
+                </Menu.Menu>
                     }
-          </Menu>
+            </Menu>
         )
     }
 }

@@ -54,17 +54,18 @@ class Signup extends React.Component {
     }
 
     render(){
+        const myStyle = {backgroundColor: 'rgba(255,248,199,0.3)'}
         return(
             <Form className='login' onSubmit={this.handleSubmit}>
             <Form.Field>
             <label>Username:</label>
-              <input style={{backgroundColor: 'rgba(255,248,199,0.3)'}} name='username' onChange={this.handleChange} placeholder='Username' />
+              <input style={myStyle} name='username' onChange={this.handleChange} placeholder='Username' />
             </Form.Field>
             <Form.Field>
             <label>Password:</label>
-              <input style={{backgroundColor: 'rgba(255,248,199,0.3)'}} type='password' name='password' onChange={this.handleChange} placeholder='Password' />
+              <input style={myStyle} type='password' name='password' onChange={this.handleChange} placeholder='Password' />
             </Form.Field>
-            <Button style={{backgroundColor: 'rgba(255,248,199,0.3)'}} type='submit'>Signup</Button>
+            <Button style={myStyle} type='submit'>Signup</Button>
           </Form>
         )
     }

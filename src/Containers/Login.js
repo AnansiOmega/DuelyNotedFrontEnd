@@ -43,20 +43,21 @@ class Login extends React.Component {
     }
 
     render(){
+        const myStyle = {backgroundColor: 'rgba(255,248,199,0.3)'}
         return(
             <Form className='login' onSubmit={this.handleSubmit}>
                 {this.state.error && <h4 style={{color: 'red'}}>{this.state.error}</h4>}
             <Form.Field>
                 <label>Username:</label>
-              <input style={{backgroundColor: 'rgba(255,248,199,0.3)'}} name='username' onChange={this.handleChange} placeholder='Username' />
+              <input style={myStyle} name='username' onChange={this.handleChange} placeholder='Username' />
             </Form.Field>
             <Form.Field>
                 <label>Password:</label>
-              <input style={{backgroundColor: 'rgba(255,248,199,0.3)'}} type='password' name='password' onChange={this.handleChange} placeholder='Password' />
+              <input style={myStyle} type='password' name='password' onChange={this.handleChange} placeholder='Password' />
             </Form.Field>
-            <Button style={{backgroundColor: 'rgba(255,248,199,0.3)'}} type='submit'>Login</Button>
+            <Button style={myStyle} type='submit'>Login</Button>
             <Link to='/signup'>
-            <Button style={{backgroundColor: 'rgba(255,248,199,0.3)'}}>Signup</Button>
+            <Button style={myStyle}>Signup</Button>
             </Link>
           </Form>
         )
